@@ -47,7 +47,6 @@ public class BuMariana {
         } while (pilihan != 5);
     }
 
-    // Fungsi untuk meninputkan data penjualan
     public static void inputDataPenjualan() {
         System.out.println("\n=== Input Data Penjualan ===");
         for (int i = 0; i < menu.length; i++) {
@@ -59,7 +58,6 @@ public class BuMariana {
         }
     }
 
-    // Fungsi untuk menampilkan seluruh data penjualan
     public static void tampilkanDataPenjualan() {
         System.out.println("\n=== Data Penjualan ===");
         System.out.printf("%-15s%-10s%-10s%-10s%-10s%-10s%-10s%-10s\n", "Menu", "Hari 1", "Hari 2", "Hari 3", "Hari 4", "Hari 5", "Hari 6", "Hari 7");
@@ -72,7 +70,6 @@ public class BuMariana {
         }
     }
 
-    // Fungsi untuk menampilkan menu dengan penjualan tertinggi
     public static void menuPenjualanTertinggi() {
         System.out.println("\n=== Menu dengan Penjualan Tertinggi ===");
         int maxPenjualan = 0;
@@ -90,7 +87,6 @@ public class BuMariana {
         System.out.println("Menu dengan penjualan tertinggi: " + menuTertinggi + " (Total: " + maxPenjualan + ")");
     }
 
-    // Fungsi untuk menampilkan rata-rata penjualan per menu
     public static void rataRataPenjualan() {
         System.out.println("\n=== Rata-rata Penjualan per Menu ===");
         for (int i = 0; i < menu.length; i++) {
