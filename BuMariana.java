@@ -1,19 +1,29 @@
 import java.util.Scanner;
+
 public class BuMariana {
 
     static Scanner input = new Scanner(System.in);
-
-    static int[][] penjualan = {
-        {20, 20, 25, 20, 10, 60, 10}, 
-        {30, 80, 40, 10, 15, 20, 25}, 
-        {5, 9, 20, 25, 10, 5, 45},    
-        {50, 8, 17, 18, 10, 30, 6},   
-        {15, 10, 16, 15, 10, 10, 55}  
-    };
-
-    static String[] menu = {"Kopi", "Teh", "Es Degan", "Roti Bakar", "Gorengan"};
+    static int[][] penjualan;
+    static String[] menu;
 
     public static void main(String[] args) {
+        
+        System.out.print("Masukkan jumlah menu: ");
+        int jumlahMenu = input.nextInt();
+        System.out.print("Masukkan jumlah hari: ");
+        int jumlahHari = input.nextInt();
+
+        
+        penjualan = new int[jumlahMenu][jumlahHari];
+        menu = new String[jumlahMenu];
+
+        
+        input.nextLine(); 
+        for (int i = 0; i < jumlahMenu; i++) {
+            System.out.print("Masukkan nama menu ke-" + (i + 1) + ": ");
+            menu[i] = input.nextLine();
+        }
+
         int pilihan;
         do {
             System.out.println("\n=== Menu Program ===");
@@ -27,16 +37,16 @@ public class BuMariana {
 
             switch (pilihan) {
                 case 1:
-                    inputDataPenjualan();
+                    inputDataPenjualan(jumlahHari);
                     break;
                 case 2:
-                    tampilkanDataPenjualan();
+                    tampilkanDataPenjualan(jumlahHari);
                     break;
                 case 3:
-                    menuPenjualanTertinggi();
+                    menuPenjualanTertinggi(jumlahHari);
                     break;
                 case 4:
-                    rataRataPenjualan();
+                    rataRataPenjualan(jumlahHari);
                     break;
                 case 5:
                     System.out.println("Program selesai.");
@@ -47,36 +57,42 @@ public class BuMariana {
         } while (pilihan != 5);
     }
 
-    public static void inputDataPenjualan() {
+    public static void inputDataPenjualan(int jumlahHari) {
         System.out.println("\n=== Input Data Penjualan ===");
         for (int i = 0; i < menu.length; i++) {
             System.out.println("Menu: " + menu[i]);
-            for (int j = 0; j < 7; j++) {
+            for (int j = 0; j < jumlahHari; j++) {
                 System.out.print("Masukkan penjualan hari ke-" + (j + 1) + ": ");
                 penjualan[i][j] = input.nextInt();
             }
         }
     }
 
-    public static void tampilkanDataPenjualan() {
+    public static void tampilkanDataPenjualan(int jumlahHari) {
         System.out.println("\n=== Data Penjualan ===");
-        System.out.printf("%-15s%-10s%-10s%-10s%-10s%-10s%-10s%-10s\n", "Menu", "Hari 1", "Hari 2", "Hari 3", "Hari 4", "Hari 5", "Hari 6", "Hari 7");
+        System.out.printf("%-15s", "Menu");
+        for (int i = 1; i <= jumlahHari; i++) {
+            System.out.printf("%-10s", "Hari " + i);
+        }
+        System.out.println();
+
         for (int i = 0; i < menu.length; i++) {
             System.out.printf("%-15s", menu[i]);
-            for (int j = 0; j < 7; j++) {
+            for (int j = 0; j < jumlahHari; j++) {
                 System.out.printf("%-10d", penjualan[i][j]);
             }
             System.out.println();
         }
     }
 
-    public static void menuPenjualanTertinggi() {
+    public static void menuPenjualanTertinggi(int jumlahHari) {
         System.out.println("\n=== Menu dengan Penjualan Tertinggi ===");
         int maxPenjualan = 0;
         String menuTertinggi = "";
+
         for (int i = 0; i < menu.length; i++) {
             int totalPenjualan = 0;
-            for (int j = 0; j < 7; j++) {
+            for (int j = 0; j < jumlahHari; j++) {
                 totalPenjualan += penjualan[i][j];
             }
             if (totalPenjualan > maxPenjualan) {
@@ -87,14 +103,14 @@ public class BuMariana {
         System.out.println("Menu dengan penjualan tertinggi: " + menuTertinggi + " (Total: " + maxPenjualan + ")");
     }
 
-    public static void rataRataPenjualan() {
+    public static void rataRataPenjualan(int jumlahHari) {
         System.out.println("\n=== Rata-rata Penjualan per Menu ===");
         for (int i = 0; i < menu.length; i++) {
             int totalPenjualan = 0;
-            for (int j = 0; j < 7; j++) {
+            for (int j = 0; j < jumlahHari; j++) {
                 totalPenjualan += penjualan[i][j];
             }
-            double rataRata = (double) totalPenjualan / 7;
+            double rataRata = (double) totalPenjualan / jumlahHari;
             System.out.printf("Rata-rata penjualan %s: %.2f\n", menu[i], rataRata);
         }
     }
